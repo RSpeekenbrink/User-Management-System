@@ -13,7 +13,7 @@ class Kernel implements KernelInterface
 	 * 
 	 * @var bool
 	 */
-	protected $debug = false;
+	private $debug = false;
 
 	/**
 	 * Controllers Namespace

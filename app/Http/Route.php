@@ -11,35 +11,35 @@ class Route implements RouteInterface
 	 *
 	 * @var array
 	 */
-	protected static $postRoutes = [];
+	private static $postRoutes = [];
 
 	/**
 	 * Array of all get routes
 	 *
 	 * @var array
 	 */
-	protected static $getRoutes = [];
+	private static $getRoutes = [];
 
 	/**
 	 * Array of all delete routes
 	 *
 	 * @var array
 	 */
-	protected static $deleteRoutes = [];
+	private static $deleteRoutes = [];
 
 	/**
 	 * Array of all put routes
 	 *
 	 * @var array
 	 */
-	protected static $putRoutes = [];
+	private static $putRoutes = [];
 
 	/**
 	 * Array of all patch routes
 	 *
 	 * @var array
 	 */
-	protected static $patchRoutes = [];
+	private static $patchRoutes = [];
 
 	/**
 	 * Returns array of routes for method x

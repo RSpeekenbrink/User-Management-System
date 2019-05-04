@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Contracts\Http\Request;
+use App\Http\Request;
+use App\Http\View;
 
 class HomeController extends Controller
 {
@@ -13,8 +14,8 @@ class HomeController extends Controller
 	 * @param Request $request
 	 * @return View
 	 */
-	public function index($request)
+	public function index(Request $request)
 	{
-		echo 'Hello World!';
+		View::create('Home')->show();
 	}
 }
