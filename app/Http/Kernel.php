@@ -16,6 +16,13 @@ class Kernel implements KernelInterface
 	protected $debug = false;
 
 	/**
+	 * Controllers Namespace
+	 *
+	 * @var string
+	 */
+	public $controllerNamespace = '\\App\\Http\\Controllers';
+
+	/**
 	 * Enables Debug Mode
 	 *
 	 * @return void
@@ -70,11 +77,11 @@ class Kernel implements KernelInterface
 
 		$handler = $this->getHandlerForRequest($request);
 
-		echo $handler;
+		$controller = $this->controllerNamespace . '\\' . explode('@', $handler)[0];
+		$function = explode('@', $handler)[1];
 
-		// echo $request->url() . PHP_EOL;
-		// echo $request->method() . PHP_EOL;
-		print_r(Route::getRoutes());
+		$controller = new $controller();
+		$controller->{$function}($request);
 	}
 
 	/**
@@ -99,7 +106,7 @@ class Kernel implements KernelInterface
 
 		if ($result == null) {
 			// TODO: Catch and show 404
-			throw new \Exception('Request Handler not Found');
+			throw new \Exception(' Request Handler  not Fo und');
 		} else {
 			return $result;
 		}

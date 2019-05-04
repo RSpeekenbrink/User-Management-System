@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Contracts\Http\Controllers;
+namespace App\Http\Controllers;
 
-use App\Http\Controlllers\Controller;
+use App\Http\Controllers\Controller;
+use App\Contracts\Http\Request;
 
 class HomeController extends Controller
 {
 	/**
 	 * Prepare the index view and return it
 	 * 
+	 * @param Request $request
 	 * @return View
 	 */
-	public function index()
+	public function index($request)
 	{
 		echo 'Hello World!';
 	}

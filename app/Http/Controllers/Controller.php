@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controlllers;
+namespace App\Http\Controllers;
 
 use App\Contracts\Http\Controllers\ControllerInterface;
 
