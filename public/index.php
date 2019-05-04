@@ -14,6 +14,11 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 /**
+ * Bootstrap the application
+ */
+$app = App\Application::getInstance();
+
+/**
  * Build the Request
  */
 $request = \App\Http\Request::capture();
@@ -23,6 +28,4 @@ $request = \App\Http\Request::capture();
  */
 $kernel = new \App\Http\Kernel();
 
-$kernel->enableDebug();
-
-$kernel->handle($request);
+$kernel->handle($app, $request);

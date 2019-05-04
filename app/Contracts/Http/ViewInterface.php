@@ -30,4 +30,11 @@ interface ViewInterface
 	 * @return void
 	 */
 	public function show();
+
+	/**
+	 * Return the path containing all views
+	 *
+	 * @return string
+	 */
+	public function getViewPath();
 }

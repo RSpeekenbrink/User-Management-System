@@ -5,15 +5,16 @@ namespace App\Http;
 use App\Contracts\Http\KernelInterface;
 use App\Http\Request;
 use App\Http\Route;
+use App\Application;
 
 class Kernel implements KernelInterface
 {
 	/**
-	 * Determires if the app runs in debug mode
+	 * The application Instance
 	 * 
-	 * @var bool
+	 * @var Application
 	 */
-	private $debug = false;
+	private $app;
 
 	/**
 	 * Controllers Namespace
@@ -62,17 +63,20 @@ class Kernel implements KernelInterface
 	public function boot()
 	{
 		$this->setupExceptionHandling();
-
 		$this->setupRoutes();
+		$this->app->setupDatabaseConnection();
 	}
 
 	/**
 	 * Handles a request and returns a response that will be send back to the client.
 	 *
+	 * @param App\Application $app
 	 * @param App\Http\Request $request The Request To Handle
 	 */
-	public function handle(Request $request)
+	public function handle(Application $app, Request $request)
 	{
+		$this->app = $app;
+
 		$this->boot();
 
 		$handler = $this->getHandlerForRequest($request);
@@ -129,7 +133,7 @@ class Kernel implements KernelInterface
 	 */
 	public function setupExceptionHandling()
 	{
-		if ($this->debug) {
+		if ($this->app->debug()) {
 			$whoops = new \Whoops\Run;
 			$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 			$whoops->register();
