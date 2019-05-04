@@ -22,4 +22,11 @@ interface KernelInterface
 	 * @param App\Http\Request $request The Request To Handle
 	 */
 	public function handle(Request $request);
+
+	/**
+	 * Registers Routes
+	 *
+	 * @return void
+	 */
+	public function setupRoutes();
 }

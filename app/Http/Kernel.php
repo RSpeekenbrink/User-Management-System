@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Contracts\Http\KernelInterface;
 use App\Http\Request;
+use App\Http\Route;
 
 class Kernel implements KernelInterface
 {
@@ -12,7 +13,7 @@ class Kernel implements KernelInterface
 	 */
 	public function boot()
 	{
-		// TODO: Setup Environment
+		$this->setupRoutes();
 	}
 
 	/**
@@ -25,6 +26,18 @@ class Kernel implements KernelInterface
 		$this->boot();
 
 		// TODO: Handle Request
-		echo $request->url();
+		echo $request->url() . PHP_EOL;
+		echo $request->method() . PHP_EOL;
+		print_r(Route::getRoutes());
+	}
+
+	/**
+	 * Registers Routes
+	 *
+	 * @return void
+	 */
+	public function setupRoutes()
+	{
+		Route::get('/', 'HomeController@index');
 	}
 }
