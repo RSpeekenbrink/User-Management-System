@@ -9,10 +9,53 @@ use App\Http\Route;
 class Kernel implements KernelInterface
 {
 	/**
+	 * Determires if the app runs in debug mode
+	 * 
+	 * @var bool
+	 */
+	protected $debug = false;
+
+	/**
+	 * Enables Debug Mode
+	 *
+	 * @return void
+	 */
+	public function enableDebug()
+	{
+		$this->debug = true;
+
+		$this->reboot();
+	}
+
+	/**
+	 * Disables Debug Mode
+	 *
+	 * @return void
+	 */
+	public function disableDebug()
+	{
+		$this->debug = false;
+
+		$this->reboot();
+	}
+
+	/**
+	 * Reboots the Kernel
+	 * 
+	 * @return void
+	 */
+	public function reboot()
+	{
+		$this->boot();
+	}
+
+	/**
 	 * Boots the Kernel
 	 */
 	public function boot()
 	{
+		$this->setupExceptionHandling();
+
 		$this->setupRoutes();
 	}
 
@@ -25,10 +68,41 @@ class Kernel implements KernelInterface
 	{
 		$this->boot();
 
-		// TODO: Handle Request
-		echo $request->url() . PHP_EOL;
-		echo $request->method() . PHP_EOL;
+		$handler = $this->getHandlerForRequest($request);
+
+		echo $handler;
+
+		// echo $request->url() . PHP_EOL;
+		// echo $request->method() . PHP_EOL;
 		print_r(Route::getRoutes());
+	}
+
+	/**
+	 * Get the Handler for request
+	 *
+	 * @param App\Http\Request $request The Request To Handle
+	 * @return string controller@function
+	 */
+	private function getHandlerForRequest(Request $request)
+	{
+		$routes = Route::getRoutesForMethod($request->method());
+		$url = $request->url();
+
+		$result = null;
+
+		foreach ($routes as $route) {
+			if ($route['route'] == $url) {
+				$result = $route['handler'];
+				break;
+			}
+		}
+
+		if ($result == null) {
+			// TODO: Catch and show 404
+			throw new \Exception('Request Handler not Found');
+		} else {
+			return $result;
+		}
 	}
 
 	/**
@@ -39,5 +113,21 @@ class Kernel implements KernelInterface
 	public function setupRoutes()
 	{
 		Route::get('/', 'HomeController@index');
+	}
+
+	/**
+	 * Sets up Exception Handling
+	 * 
+	 * @return void
+	 */
+	public function setupExceptionHandling()
+	{
+		if ($this->debug) {
+			$whoops = new \Whoops\Run;
+			$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+			$whoops->register();
+		} else {
+			//TODO: Normal Exception Screen
+		}
 	}
 }

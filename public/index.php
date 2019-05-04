@@ -23,4 +23,6 @@ $request = \App\Http\Request::capture();
  */
 $kernel = new \App\Http\Kernel();
 
+$kernel->enableDebug();
+
 $kernel->handle($request);

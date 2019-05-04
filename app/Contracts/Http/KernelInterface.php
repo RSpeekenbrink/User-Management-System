@@ -17,6 +17,27 @@ interface KernelInterface
 	public function boot();
 
 	/**
+	 * Reboots the Kernel
+	 * 
+	 * @return void
+	 */
+	public function reboot();
+
+	/**
+	 * Enables Debug Mode
+	 *
+	 * @return void
+	 */
+	public function enableDebug();
+
+	/**
+	 * Disables Debug Mode
+	 *
+	 * @return void
+	 */
+	public function disableDebug();
+
+	/**
 	 * Handles a request and returns a response that will be send back to the client.
 	 * 
 	 * @param App\Http\Request $request The Request To Handle
@@ -29,4 +50,11 @@ interface KernelInterface
 	 * @return void
 	 */
 	public function setupRoutes();
+
+	/**
+	 * Sets up Exception Handling
+	 * 
+	 * @return void
+	 */
+	public function setupExceptionHandling();
 }
