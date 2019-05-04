@@ -11,7 +11,7 @@
 /**
  * Register the autoloader from Composer. This will also load our App namespace.
  */
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /**
  * Run the application
