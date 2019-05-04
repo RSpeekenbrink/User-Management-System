@@ -14,8 +14,13 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 /**
+ * Build the Request
+ */
+$request = \App\Http\Request::capture();
+
+/**
  * Run the application
  */
 $kernel = new \App\Http\Kernel();
 
-$kernel->handle();
+$kernel->handle($request);

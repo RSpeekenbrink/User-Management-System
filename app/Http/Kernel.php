@@ -2,7 +2,8 @@
 
 namespace App\Http;
 
-use App\Contracts\KernelInterface;
+use App\Contracts\Http\KernelInterface;
+use App\Http\Request;
 
 class Kernel implements KernelInterface
 {
@@ -16,11 +17,14 @@ class Kernel implements KernelInterface
 
 	/**
 	 * Handles a request and returns a response that will be send back to the client.
+	 *
+	 * @param App\Http\Request $request The Request To Handle
 	 */
-	public function handle()
+	public function handle(Request $request)
 	{
 		$this->boot();
 
 		// TODO: Handle Request
+		echo $request->url();
 	}
 }

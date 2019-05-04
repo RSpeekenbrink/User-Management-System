@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Contracts;
+namespace App\Contracts\Http;
+
+use App\Http\Request;
 
 /**
  * The Kernel is the main entry point for the application. It creates the
@@ -16,6 +18,8 @@ interface KernelInterface
 
 	/**
 	 * Handles a request and returns a response that will be send back to the client.
+	 * 
+	 * @param App\Http\Request $request The Request To Handle
 	 */
-	public function handle();
+	public function handle(Request $request);
 }
