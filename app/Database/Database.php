@@ -107,16 +107,4 @@ class Database implements DatabaseInterface
 	{
 		return $this->pdo;
 	}
-
-	/**
-	 * Execute Query and get data
-	 * 
-	 * @param string $query
-	 * @param array $params
-	 * @return array
-	 */
-	public function query($query, $params = [])
-	{
-		//
-	}
 }

@@ -3,29 +3,44 @@
 namespace App\Models;
 
 use App\Contracts\Models\ModelInterface;
-use App\Database\Database;
 use App\Application;
 
 class Model implements ModelInterface
 {
 	/**
-	 * Database Connection
+	 * The Database Table of the Model
 	 * 
-	 * @var Database
+	 * @var string
 	 */
-	protected $dbConnection = null;
+	public static $table = '';
 
 	/**
-	 * Get the Database Connection
+	 * Get an array of All Models
 	 * 
-	 * @return Database
+	 * @return array
 	 */
-	private function db()
+	public static function all()
 	{
-		if ($this->dbConnection == null) {
-			$this->dbConnection = Application::getInstance()->databaseConnection();
+		$db = Application::getInstance()->databaseConnection()->pdo();
+
+		$stmt = $db->query('SELECT * FROM ' . static::$table);
+
+		$result = [];
+
+		while ($row = $stmt->fetch()) {
+			$result[] = $row;
 		}
 
-		return $this->dbConnection;
+		return $result;
+	}
+
+	/**
+	 * Save current Instance to the Database
+	 * 
+	 * @return bool success
+	 */
+	public function save()
+	{
+		return false;
 	}
 }
