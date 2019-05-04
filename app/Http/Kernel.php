@@ -110,7 +110,7 @@ class Kernel implements KernelInterface
 
 		if ($result == null) {
 			// TODO: Catch and show 404
-			throw new \Exception(' Request Handler  not Fo und');
+			throw new \Exception('Request Handler not Found');
 		} else {
 			return $result;
 		}
@@ -124,6 +124,7 @@ class Kernel implements KernelInterface
 	public function setupRoutes()
 	{
 		Route::get('/', 'HomeController@index');
+		Route::get('/login', 'AuthController@showLoginForm');
 	}
 
 	/**
