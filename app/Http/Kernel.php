@@ -97,8 +97,7 @@ class Kernel implements KernelInterface
 	private function getHandlerForRequest(Request $request)
 	{
 		$routes = Route::getRoutesForMethod($request->method());
-		$url = $request->url();
-
+		$url = strtok($request->url(), '?');
 		$result = null;
 
 		foreach ($routes as $route) {
@@ -125,6 +124,7 @@ class Kernel implements KernelInterface
 	{
 		Route::get('/', 'HomeController@index');
 		Route::get('/login', 'AuthController@showLoginForm');
+		Route::post('/login', 'AuthController@postLogin');
 	}
 
 	/**
