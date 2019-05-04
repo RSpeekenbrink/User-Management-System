@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Request;
 use App\Http\View;
+use App\Models\User;
 
 class AuthController extends Controller
 {

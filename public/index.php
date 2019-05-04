@@ -8,6 +8,17 @@
  * @author Remco Speekenbrink
  */
 
+// $test = 'secret';
+// $password = password_hash('secret', PASSWORD_BCRYPT);
+
+// echo $test . '<br>';
+
+// echo $password . '<br>';
+
+// echo password_verify($test, $password) ? 'yes' : 'no';
+
+// exit();
+
 /**
  * Register the autoloader from Composer. This will also load our App namespace.
  */

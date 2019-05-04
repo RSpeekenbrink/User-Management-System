@@ -15,6 +15,41 @@ class Model implements ModelInterface
 	public static $table = '';
 
 	/**
+	 * The Attributes for this class
+	 * 
+	 * @var array
+	 */
+	public $attributes = [];
+
+	/**
+	 * Determires if the Model exists in the database and
+	 * therefore should be inserted or updated
+	 * 
+	 * @var bool
+	 */
+	private $exists = false;
+
+	/**
+	 * Constructs new model based on attributes
+	 * 
+	 * @param array $attributes (optional)
+	 * @param bool $exists (optional)
+	 * @return self
+	 */
+	public function __construct(array $attributes = null, bool $exists = false)
+	{
+		$this->exists = $exists;
+
+		foreach ($this->attributes as $attribute) {
+			if ($attributes && array_key_exists($attribute, $attributes)) {
+				$this->{$attribute} = $attributes[$attribute];
+			} else {
+				$this->{$attribute} = null;
+			}
+		}
+	}
+
+	/**
 	 * Get an array of All Models
 	 * 
 	 * @return array
@@ -26,9 +61,10 @@ class Model implements ModelInterface
 		$stmt = $db->query('SELECT * FROM ' . static::$table);
 
 		$result = [];
+		$currentClass = get_called_class();
 
 		while ($row = $stmt->fetch()) {
-			$result[] = $row;
+			$result[] = new $currentClass($row, true);
 		}
 
 		return $result;
@@ -41,6 +77,41 @@ class Model implements ModelInterface
 	 */
 	public function save()
 	{
-		return false;
+		if ($this->exists) {
+			// Update
+
+		} else {
+			// Insert New
+			$this->insertInDatabase();
+		}
+	}
+
+	/**
+	 * Inserts the model into the database
+	 * 
+	 * @return void
+	 */
+	private function insertInDatabase()
+	{
+		$this->created_at = date("Y-m-d H:i:s");
+		$this->updated_at = date("Y-m-d H:i:s");
+
+		$db = Application::getInstance()->databaseConnection()->pdo();
+
+		$attributes = implode(', ', $this->attributes);
+		$values = '';
+		$executeValues = [];
+
+		foreach ($this->attributes as $attribute) {
+			if ($values != '') {
+				$values .= ', ';
+			}
+
+			$values .= '?';
+			$executeValues[] = $this->{$attribute};
+		}
+
+		$stmt = $db->prepare('INSERT INTO ' . static::$table . '(' . $attributes . ') VALUES (' . $values . ')');
+		$stmt->execute($executeValues);
 	}
 }

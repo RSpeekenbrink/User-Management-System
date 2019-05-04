@@ -12,12 +12,17 @@ class User extends Model
 	public static $table = 'users';
 
 	/**
-	 * Save current Instance to the Database
+	 * The Attributes for this class
 	 * 
-	 * @return bool success
+	 * @var array
 	 */
-	public function save()
-	{
-		//TODO
-	}
+	public $attributes = [
+		'id',
+		'username',
+		'email',
+		'password',
+		'updated_at',
+		'created_at',
+		'admin'
+	];
 }
