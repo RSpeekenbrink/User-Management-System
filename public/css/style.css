@@ -50,3 +50,7 @@
     font-weight: 600;
     text-decoration: none;
 }
+.login-form-1 .form-check{
+    float:right;
+    padding-top: .4rem;
+}
