@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Contracts\Http\Middleware\MiddlewareInterface;
 use App\Http\Request;
 use App\Models\User;
+use App\Http\Controllers\AuthController;
 
 class Authenticated implements MiddlewareInterface
 {
@@ -20,8 +21,18 @@ class Authenticated implements MiddlewareInterface
 			return false;
 		}
 
-		if (!User::find($_SESSION['user_id'])) {
+		$user = User::find($_SESSION['user_id']);
+
+		if (!$user) {
 			header('Location: ../login');
+			return false;
+		}
+
+		if (!$user->active) {
+			$auth = new AuthController();
+
+			$auth->logout($request);
+
 			return false;
 		}
 

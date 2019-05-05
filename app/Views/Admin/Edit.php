@@ -56,6 +56,15 @@ if (isset($_GET['edit'])) {
 
 			<hr>
 
+			<h2>Block User</h2>
+
+			<?php if ($user->active) { ?>
+				<a class="btn btn-danger" href="/admin/block?user=<?php echo $user->id ?>">Block User</a>
+			<?php } else { ?>
+				<a class="btn btn-danger" href="/admin/unblock?user=<?php echo $user->id ?>">Unblock User</a>
+			<?php } ?>
+			<hr>
+
 		</div>
 	</div>
 </div>

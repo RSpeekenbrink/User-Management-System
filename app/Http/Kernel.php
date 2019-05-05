@@ -191,6 +191,8 @@ class Kernel implements KernelInterface
 		Route::post('/admin/edit', 'AdminController@editUser', 'Web,Authenticated,Admin');
 		Route::get('/admin/add', 'AdminController@addUserForm', 'Web,Authenticated,Admin');
 		Route::post('/admin/add', 'AdminController@addUser', 'Web,Authenticated,Admin');
+		Route::get('/admin/block', 'AdminController@deactivateUser', 'Web,Authenticated,Admin');
+		Route::get('/admin/unblock', 'AdminController@activateUser', 'Web,Authenticated,Admin');
 	}
 
 	/**

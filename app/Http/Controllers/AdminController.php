@@ -108,12 +108,59 @@ class AdminController extends Controller
 			'username' => $_POST['username'],
 			'email' => $_POST['email'],
 			'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
-			'admin' => 0
+			'admin' => 0,
+			'active' => 1
 		]);
 
 		$newUser->save();
 
 		header('Location: ../admin?create=success');
+	}
+
+	/**
+	 * Activate the given user
+	 * 
+	 * @param Request $request
+	 * @return void
+	 */
+	public function activateUser(Request $request)
+	{
+		$this->changeUserActive(true);
+	}
+
+	/**
+	 * Activate the given user
+	 * 
+	 * @param Request $request
+	 * @return void
+	 */
+	public function deactivateUser(Request $request)
+	{
+		$this->changeUserActive(false);
+	}
+
+	/**
+	 * Handle active changes
+	 * 
+	 * @param bool $active
+	 * @return void
+	 */
+	private function changeUserActive(bool $active)
+	{
+		if (!isset($_GET['user'])) {
+			return;
+		}
+
+		$user = User::find($_GET['user']);
+
+		if (!$user) {
+			return;
+		}
+
+		$user->active = $active ? 1 : 0;
+		$user->save();
+
+		header('Location: ../admin/edit?edit=success&user=' . $_GET['user']);
 	}
 
 	/**

@@ -57,6 +57,11 @@ class AuthController extends Controller
 
 		$userToLogIn = User::getByUsernameOrEmail($_POST['username']);
 
+		if (!$userToLogIn->active) {
+			header('Location: ../login?error=invalid_login');
+			return;
+		}
+
 		// Wrong Password
 		if (!password_verify($_POST['password'], $userToLogIn->password)) {
 			header('Location: ../login?error=invalid_login');
@@ -122,7 +127,8 @@ class AuthController extends Controller
 			'username' => $_POST['username'],
 			'email' => $_POST['email'],
 			'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
-			'admin' => 0
+			'admin' => 0,
+			'active' => 1
 		]);
 
 		$newUser->save();

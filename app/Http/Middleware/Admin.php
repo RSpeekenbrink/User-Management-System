@@ -32,6 +32,14 @@ class Admin implements MiddlewareInterface
 			return false;
 		}
 
+		if (!$user->active) {
+			$auth = new AuthController();
+
+			$auth->logout($request);
+
+			return false;
+		}
+
 		if (!$user->admin) {
 			header('Location: ../');
 			return false;

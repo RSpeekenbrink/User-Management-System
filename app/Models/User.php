@@ -23,6 +23,7 @@ class User extends Model
 		'username',
 		'email',
 		'password',
+		'active',
 		'last_login',
 		'updated_at',
 		'created_at',
