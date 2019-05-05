@@ -1,5 +1,13 @@
 <?php include_once __DIR__ . '/Layout/Header.php' ?>
 
-<h1>Hello World!</h1>
+<div class="container my-5">
+	<div class="card my-5">
+		<div class="card-body">
+			<h5 class="card-title">Hello World!</h5>
+			<p class="card-text">This is the HomePage!</p>
+			<a href="/login" class="btn btn-primary">Go to the login page</a>
+		</div>
+	</div>
+</div>
 
 <?php include_once __DIR__ . '/Layout/Footer.php' ?>

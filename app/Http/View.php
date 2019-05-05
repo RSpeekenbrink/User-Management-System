@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Contracts\Http\ViewInterface;
+use App\Http\Request;
 
 class View implements ViewInterface
 {
@@ -14,14 +15,34 @@ class View implements ViewInterface
 	private $path;
 
 	/**
+	 * The current Request
+	 * 
+	 * @var Request
+	 */
+	private $request;
+
+	/**
+	 * Set the current Request
+	 * 
+	 * @return void
+	 */
+	public function setRequest(Request $request)
+	{
+		$this->request = $request;
+	}
+
+	/**
 	 * Create a view based on a view name
 	 *
 	 * @param string $viewName
+	 * @param Request $request (optional)
 	 * @return self
 	 */
-	public static function create(string $viewName)
+	public static function create(string $viewName, Request $request = null)
 	{
 		$view = new View();
+
+		$view->setRequest($request);
 
 		$view->setPath($view->getViewPath() . str_replace('.', DIRECTORY_SEPARATOR, $viewName));
 

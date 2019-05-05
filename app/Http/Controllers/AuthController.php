@@ -16,7 +16,7 @@ class AuthController extends Controller
 	 */
 	public function showLoginForm(Request $request)
 	{
-		View::create('Login')->show();
+		View::create('Login', $request)->show();
 	}
 
 	/**
@@ -54,12 +54,12 @@ class AuthController extends Controller
 		}
 
 		if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-			header('Location: ../login?error=email&username=' . $_POST['username'] . '&email=' . $_POST['email']);
+			header('Location: ../login?error=email&username=' . $_POST['username']);
 			return;
 		}
 
 		if (!preg_match("/^[a-zA-Z0-9]*$/", $_POST['username'])) {
-			header('Location: ../login?error=invalid_username&username=' . $_POST['username'] . '&email=' . $_POST['email']);
+			header('Location: ../login?error=invalid_username&email=' . $_POST['email']);
 			return;
 		}
 
@@ -68,7 +68,15 @@ class AuthController extends Controller
 			return;
 		}
 
-		//TODO: CHECK IF USER ALREADY EXISTS
+		if (User::getByUsernameOrEmail($_POST['email'])) {
+			header('Location: ../login?error=email_exists&username=' . $_POST['username']);
+			return;
+		}
+
+		if (User::getByUsernameOrEmail($_POST['username'])) {
+			header('Location: ../login?error=username_exists&email=' . $_POST['email']);
+			return;
+		}
 
 		$newUser = new User([
 			'username' => $_POST['username'],
