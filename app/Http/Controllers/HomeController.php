@@ -18,7 +18,5 @@ class HomeController extends Controller
 	public function index(Request $request)
 	{
 		View::create('Home', $request)->show();
-
-		print_r(User::getByUsernameOrEmail('test@example.com'));
 	}
 }

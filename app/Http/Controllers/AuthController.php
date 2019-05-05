@@ -27,7 +27,47 @@ class AuthController extends Controller
 	 */
 	public function postLogin(Request $request)
 	{
-		echo "Login Post";
+		//Validate POST Data
+		$error = false;
+
+		foreach (['username', 'password'] as $key) {
+			if (!array_key_exists($key, $_POST) || empty($_POST[$key])) {
+				$error = true;
+				break;
+			}
+		}
+
+		// Missing Data
+		if ($error) {
+			header('Location: ../login?error=loginfields');
+			return;
+		}
+
+		// Invalid Username
+		if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $_POST['username'])) {
+			header('Location: ../login?error=invalid_login');
+			return;
+		}
+
+		// Account not found
+		if (!User::getByUsernameOrEmail($_POST['username'])) {
+			header('Location: ../login?error=invalid_login');
+			return;
+		}
+
+		$userToLogIn = User::getByUsernameOrEmail($_POST['username']);
+
+		// Wrong Password
+		if (!password_verify($_POST['password'], $userToLogIn->password)) {
+			header('Location: ../login?error=invalid_login');
+			return;
+		}
+
+		// All is correct, log the user in
+		$_SESSION['user_id'] = $userToLogIn->id;
+
+		header('Location: ../');
+		return;
 	}
 
 	/**
@@ -88,5 +128,24 @@ class AuthController extends Controller
 		$newUser->save();
 
 		header('Location: ../login?register=success');
+	}
+
+	/**
+	 * Log the currently logged in user out
+	 * 
+	 * @param Request $request
+	 * @return void
+	 */
+	public function logout(Request $request)
+	{
+		if (!isset($_SESSION['user_id'])) {
+			header('Location: ../login');
+			return;
+		}
+
+		session_unset();
+
+		header('Location: ../login?logout=success');
+		return;
 	}
 }

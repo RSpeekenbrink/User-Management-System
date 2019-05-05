@@ -59,12 +59,25 @@ class Kernel implements KernelInterface
 
 	/**
 	 * Boots the Kernel
+	 * 
+	 * @return void
 	 */
 	public function boot()
 	{
 		$this->setupExceptionHandling();
 		$this->setupRoutes();
+		$this->startSession();
 		$this->app->setupDatabaseConnection();
+	}
+
+	/**
+	 * Start the Client's session
+	 * 
+	 * @return void
+	 */
+	private function startSession()
+	{
+		session_start();
 	}
 
 	/**
@@ -127,6 +140,8 @@ class Kernel implements KernelInterface
 		Route::post('/login', 'AuthController@postLogin');
 		Route::get('/register', 'AuthController@showLoginForm');
 		Route::post('/register', 'AuthController@postRegister');
+		Route::post('/logout', 'AuthController@logout');
+		Route::get('/logout', 'AuthController@logout');
 	}
 
 	/**

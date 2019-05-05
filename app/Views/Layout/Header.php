@@ -1,3 +1,11 @@
+<?php
+$user = null;
+
+if (isset($_SESSION['user_id'])) {
+	$user = App\Models\User::find($_SESSION['user_id']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,9 +34,17 @@
 				</li>
 			</ul>
 
-			<div class="form-inline my-2 my-lg-0">
-				<a class="btn btn-primary my-2 mr-2 my-sm-0" href="/login">Login</a>
-				<a class="btn btn-outline-secondary my-2 my-sm-0" href="/register">Register</a>
-			</div>
+			<?php if (!$user) {
+				?>
+				<div class="form-inline my-2 my-lg-0">
+					<a class="btn btn-primary my-2 mr-2 my-sm-0" href="/login">Login</a>
+					<a class="btn btn-outline-secondary my-2 my-sm-0" href="/register">Register</a>
+				</div>
+			<?php } else { ?>
+				<div class="form-inline my-2 my-lg-0">
+					<a class="my-sm-0 my-2 mr-2"><?php echo $user->username; ?></a>
+					<a class="btn btn-outline-secondary my-2 my-sm-0" href="/logout">Logout</a>
+				</div>
+			<?php } ?>
 		</div>
 	</nav>
