@@ -15,14 +15,22 @@
 
 	<?php if (isset($_GET['register'])) {
 		?>
-		<div class="alert alert-success" role="alert">
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			You succesfully registered! Please login below...
+
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
 	<?php
 } elseif (isset($_GET['logout'])) {
 	?>
-		<div class="alert alert-success" role="alert">
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			Logout Succesfull
+
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
 	<?php
 } ?>
@@ -32,50 +40,82 @@
 
 		if ($error == 'fields') {
 			?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				Please fill in all fields!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'password_confirm') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				The password does not match the password confirmation!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'invalid_username') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				The provided username is not valid! The Username should only contain letters and numbers.
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'username_exists') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				The chosen username already exists!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'email') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				The provided email is not valid!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'email_exists') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				An account with the provided email already exists!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'loginfields') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				Please fill in both username and password to login!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	} elseif ($error == 'invalid_login') {
 		?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				The provided combination of username/password cannot be found in our records!
+
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		<?php
 	}

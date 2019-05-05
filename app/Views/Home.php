@@ -5,7 +5,6 @@
 		<div class="card-body">
 			<h5 class="card-title">Hello World!</h5>
 			<p class="card-text">This is the HomePage!</p>
-			<a href="/login" class="btn btn-primary">Go to the login page</a>
 		</div>
 	</div>
 </div>

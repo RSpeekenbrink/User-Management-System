@@ -184,6 +184,7 @@ class Kernel implements KernelInterface
 		Route::post('/logout', 'AuthController@logout', 'Web');
 		Route::get('/logout', 'AuthController@logout', 'Web');
 		Route::get('/profile', 'ProfileController@getProfile', 'Web,Authenticated');
+		Route::post('/updateProfile', 'ProfileController@updateProfile', 'Web,Authenticated');
 	}
 
 	/**

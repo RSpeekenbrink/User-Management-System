@@ -15,6 +15,13 @@ class Model implements ModelInterface
 	public static $table = '';
 
 	/**
+	 * ID Collum for this Model
+	 * 
+	 * @var string
+	 */
+	private $idColumn = 'id';
+
+	/**
 	 * The Attributes for this class
 	 * 
 	 * @var array
@@ -79,7 +86,7 @@ class Model implements ModelInterface
 	{
 		if ($this->exists) {
 			// Update
-
+			$this->updateDatabase();
 		} else {
 			// Insert New
 			$this->insertInDatabase();
@@ -113,5 +120,45 @@ class Model implements ModelInterface
 
 		$stmt = $db->prepare('INSERT INTO ' . static::$table . '(' . $attributes . ') VALUES (' . $values . ')');
 		$stmt->execute($executeValues);
+	}
+
+	/**
+	 * Update current object in database
+	 *
+	 * @return void
+	 */
+	private function updateDatabase()
+	{
+		$this->updated_at = date("Y-m-d H:i:s");
+
+		$db = Application::getInstance()->databaseConnection()->pdo();
+
+		$attributes = '';
+		$values = [];
+
+		foreach ($this->attributes as $attribute) {
+			if ($attributes != '') {
+				$attributes .= ', ';
+			}
+
+			$attributes .= $attribute . '=?';
+			$values[] = $this->{$attribute};
+		}
+
+		$stmt = $db->prepare('UPDATE ' . static::$table . ' SET ' . $attributes . ' WHERE ' . $this->idColumn . ' = ' . $this->{$this->idColumn});
+		$stmt->execute($values);
+	}
+
+	/**
+	 * Delete current model from Database
+	 * 
+	 * @return void
+	 */
+	public function delete()
+	{
+		$db = Application::getInstance()->databaseConnection()->pdo();
+
+		$stmt = $db->prepare('DELETE FROM ' . static::$table . ' WHERE ' . $this->idColumn . ' = ' . $this->{$this->idColumn});
+		$stmt->execute();
 	}
 }
