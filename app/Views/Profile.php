@@ -177,7 +177,7 @@
 
 			<h2>Change Security Question</h2>
 
-			TODO
+			<a class="btnSubmit" href="/securityQuestion">Change Security Question</a>
 
 			<hr>
 

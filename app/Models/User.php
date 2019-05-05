@@ -27,7 +27,9 @@ class User extends Model
 		'last_login',
 		'updated_at',
 		'created_at',
-		'admin'
+		'admin',
+		'security_question',
+		'security_question_answer'
 	];
 
 	/**

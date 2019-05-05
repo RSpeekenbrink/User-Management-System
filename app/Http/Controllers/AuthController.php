@@ -70,6 +70,8 @@ class AuthController extends Controller
 
 		// All is correct, log the user in
 		$_SESSION['user_id'] = $userToLogIn->id;
+		$userToLogIn->last_login = date("Y-m-d H:i:s");
+		$userToLogIn->save();
 
 		header('Location: ../');
 		return;
@@ -153,5 +155,153 @@ class AuthController extends Controller
 
 		header('Location: ../login?logout=success');
 		return;
+	}
+
+	/**
+	 * Show Security Question Form
+	 * 
+	 * @param Request $request
+	 * @return void
+	 */
+	public function showSecurityQuestionForm(Request $request)
+	{
+		View::create('SecurityQuestion', $request)->show();
+	}
+
+	/**
+	 * Save new Security Question for User
+	 * 
+	 * @param Request $request
+	 * @return void
+	 */
+	public function postSecurityQuestionForm(Request $request)
+	{
+		//Validate POST Data
+		$error = false;
+
+		foreach (['question', 'answer'] as $key) {
+			if (!array_key_exists($key, $_POST) || empty($_POST[$key])) {
+				$error = true;
+				break;
+			}
+		}
+
+		if ($error) {
+			header('Location: ../securityQuestion?error=fields');
+			return;
+		}
+
+		$user = User::find($_SESSION['user_id']);
+		$user->security_question = $_POST['question'];
+		$user->security_question_answer = $_POST['answer'];
+
+		$user->save();
+
+		header('Location: ../profile?edit=success');
+	}
+
+	/**
+	 * Show Forgot Password Form
+	 *
+	 * @param Request $request
+	 * @return void
+	 */
+	public function showForgotPasswordForm(Request $request)
+	{
+		View::create('ForgotPassword', $request)->show();
+	}
+
+	/**
+	 * Get Questionform By Username/Email
+	 *
+	 * @param Request $request
+	 * @return void
+	 */
+	public function postForgotPasswordForm(Request $request)
+	{
+		//Validate POST Data
+		$error = false;
+
+		foreach (['username'] as $key) {
+			if (!array_key_exists($key, $_POST) || empty($_POST[$key])) {
+				$error = true;
+				break;
+			}
+		}
+
+		// Missing Data
+		if ($error) {
+			header('Location: ../forgot-password?error=fields');
+			return;
+		}
+
+		// Invalid Username
+		if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $_POST['username'])) {
+			header('Location: ../forgot-password?error=invalid_username');
+			return;
+		}
+
+		// Account not found
+		if (!User::getByUsernameOrEmail($_POST['username'])) {
+			header('Location: ../forgot-password?error=invalid_username');
+			return;
+		}
+
+		$user = User::getByUsernameOrEmail($_POST['username']);
+
+		header('Location: ../forgot-password?user=' . $user->id);
+	}
+
+	/**
+	 * Reset Password
+	 *
+	 * @param Request $request
+	 * @return void
+	 */
+	public function resetPassword(Request $request)
+	{
+		//Validate POST Data
+		$error = false;
+
+		foreach (['user', 'answer', 'password', 'password_confirm'] as $key) {
+			if (!array_key_exists($key, $_POST) || empty($_POST[$key])) {
+				$error = true;
+				break;
+			}
+		}
+
+		// Missing Data
+		if ($error) {
+			header('Location: ../forgot-password?error=fields');
+			return;
+		}
+
+		// Account not found
+		if (!User::find($_POST['user'])) {
+			header('Location: ../forgot-password?error=invalid_username');
+			return;
+		}
+
+		if ($_POST['password'] != $_POST['password_confirm']) {
+			header('Location: ../forgot-password?error=password_confirm');
+			return;
+		}
+
+		$user = User::find($_POST['user']);
+
+		if (!$user->security_question) {
+			header('Location: ../forgot-password?error=security_question');
+			return;
+		}
+
+		if ($user->security_question_answer != $_POST['answer']) {
+			header('Location: ../forgot-password?error=answer');
+			return;
+		}
+
+		$user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+		$user->save();
+
+		header('Location: ../login?reset=success');
 	}
 }

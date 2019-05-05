@@ -20,6 +20,16 @@ class Web implements MiddlewareInterface
 	 */
 	public function handle(Request $request)
 	{
+		if (isset($_SESSION['user_id']) && $request->url() != '/securityQuestion') {
+			$user = User::find($_SESSION['user_id']);
+
+			// No Security Question Set
+			if ($user && !$user->security_question) {
+				header('Location: ../securityQuestion?force=1');
+				return false;
+			}
+		}
+
 		return true;
 	}
 }
