@@ -32,6 +32,12 @@ if (isset($_SESSION['user_id'])) {
 				<li class="nav-item <?php echo $this->request->url() == '/' ? 'active' : ''; ?>">
 					<a class="nav-link" href="/">Home</a>
 				</li>
+
+				<?php if ($user && $user->admin) { ?>
+					<li class="nav-item <?php echo $this->request->url() == '/admin' ? 'active' : ''; ?>">
+						<a class="nav-link" href="/admin">Admin</a>
+					</li>
+				<?php } ?>
 			</ul>
 
 			<?php if (!$user) {

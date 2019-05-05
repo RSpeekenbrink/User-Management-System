@@ -23,6 +23,7 @@ class User extends Model
 		'username',
 		'email',
 		'password',
+		'last_login',
 		'updated_at',
 		'created_at',
 		'admin'
@@ -67,6 +68,31 @@ class User extends Model
 
 		while ($row = $stmt->fetch()) {
 			$result = new self($row, true);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Get all users based on search input
+	 * 
+	 * @param string $input
+	 * @return array
+	 */
+	public static function search($input)
+	{
+		$input = '%' . $input . '%';
+
+		$db = Application::getInstance()->databaseConnection()->pdo();
+
+		$stmt = $db->prepare('SELECT * FROM ' . static::$table . ' WHERE username LIKE ? OR email LIKE ?');
+		$stmt->execute([$input, $input]);
+
+		$result = [];
+		$currentClass = get_called_class();
+
+		while ($row = $stmt->fetch()) {
+			$result[] = new $currentClass($row, true);
 		}
 
 		return $result;

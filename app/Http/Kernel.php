@@ -118,11 +118,10 @@ class Kernel implements KernelInterface
 	private function handleMiddleware(Request $request)
 	{
 		$routes = Route::getRoutesForMethod($request->method());
-		$url = strtok($request->url(), '?');
 		$result = null;
 
 		foreach ($routes as $route) {
-			if ($route['route'] == $url) {
+			if ($route['route'] == $request->url()) {
 				if (isset($route['middleware'])) {
 					$middlewares = explode(',', $route['middleware']);
 
@@ -186,6 +185,7 @@ class Kernel implements KernelInterface
 		Route::get('/profile', 'ProfileController@getProfile', 'Web,Authenticated');
 		Route::post('/updateProfile', 'ProfileController@updateProfile', 'Web,Authenticated');
 		Route::post('/changePassword', 'ProfileController@changePassword', 'Web,Authenticated');
+		Route::get('/admin', 'AdminController@index', 'Web,Authenticated,Admin');
 	}
 
 	/**

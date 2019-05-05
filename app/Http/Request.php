@@ -51,7 +51,7 @@ class Request implements RequestInterface
 	 */
 	public function url()
 	{
-		return $this->url;
+		return strtok($this->url, '?');
 	}
 
 	/**
