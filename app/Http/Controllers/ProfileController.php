@@ -76,4 +76,46 @@ class ProfileController extends Controller
 
 		header('Location: ../profile?edit=success');
 	}
+
+	/**
+	 * Change Password
+	 * 
+	 * @param Request $request
+	 * @return void
+	 */
+	public function changePassword(Request $request)
+	{
+		$user = User::find($_SESSION['user_id']);
+
+		//Validate POST Data
+		$error = false;
+
+		foreach (['current_password', 'password', 'password_confirm'] as $key) {
+			if (!array_key_exists($key, $_POST) || empty($_POST[$key])) {
+				$error = true;
+				break;
+			}
+		}
+
+		if ($error) {
+			header('Location: ../profile?error=fields');
+			return;
+		}
+
+		if ($_POST['password'] != $_POST['password_confirm']) {
+			header('Location: ../profile?error=password_confirm');
+			return;
+		}
+
+		if (!password_verify($_POST['current_password'], $user->password)) {
+			header('Location: ../profile?error=password');
+			return;
+		}
+
+		$user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+		$user->save();
+
+		header('Location: ../profile?password=success');
+	}
 }

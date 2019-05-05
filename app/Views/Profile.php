@@ -10,10 +10,10 @@
 		</button>
 	</div>
 <?php
-} elseif (isset($_GET['logout'])) {
+} elseif (isset($_GET['password'])) {
 	?>
 	<div class="alert alert-success" role="alert">
-		Logout Succesfull
+		Password Successfully Changed
 
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
@@ -75,6 +75,26 @@
 			</button>
 		</div>
 	<?php
+} elseif ($error == 'password') {
+	?>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Wrong password provided
+
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	<?php
+} elseif ($error == 'password_confirm') {
+	?>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			The new password does not match the new password confirmation!
+
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	<?php
 }
 } ?>
 
@@ -122,13 +142,13 @@
 
 			<h2>Change Password</h2>
 
-			<form class="form" action="##" method="post">
+			<form class="form" action="changePassword" method="post">
 				<div class="form-group">
 					<div class="col-xs-6">
 						<label for="current_password">
 							<h4>Current Password</h4>
 						</label>
-						<input type="password" class="form-control" name="current_password" id="current_password" placeholder="Current Password" required>
+						<input type="password" class="form-control <?php echo (isset($error) && in_array($error, ['password']) ? 'is-invalid' : ''); ?>" name="current_password" id="current_password" placeholder="Current Password" required>
 					</div>
 				</div>
 
@@ -146,7 +166,7 @@
 						<label for="password_confirm">
 							<h4>New Password Confirmation</h4>
 						</label>
-						<input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="New Password Confirmation" required>
+						<input type="password" class="form-control <?php echo (isset($error) && in_array($error, ['password_confirm']) ? 'is-invalid' : ''); ?>" name="password_confirm" id="password_confirm" placeholder="New Password Confirmation" required>
 					</div>
 				</div>
 
