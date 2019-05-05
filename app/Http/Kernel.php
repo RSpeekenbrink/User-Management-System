@@ -125,6 +125,7 @@ class Kernel implements KernelInterface
 		Route::get('/', 'HomeController@index');
 		Route::get('/login', 'AuthController@showLoginForm');
 		Route::post('/login', 'AuthController@postLogin');
+		Route::post('/register', 'AuthController@postRegister');
 	}
 
 	/**

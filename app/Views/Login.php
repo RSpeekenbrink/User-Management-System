@@ -6,21 +6,21 @@
 			<h3>Login</h3>
 			<form action="/login" method="post">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Username/Email" value="" />
+					<input type="text" class="form-control" placeholder="Username/Email" value="" name="username" required />
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Password" value="" />
+					<input type="password" class="form-control" placeholder="Password" value="" name="password" required />
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btnSubmit" value="Login" />
 
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="remember-me">
+						<input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
 						<label class="form-check-label" for="remember-me">Remember Me</label>
 					</div>
 				</div>
 				<div class="form-group">
-					<a href="#" class="ForgetPwd">Forgot Password?</a>
+					<a href="/forgot-password" class="ForgetPwd">Forgot Password?</a>
 				</div>
 			</form>
 		</div>
@@ -28,13 +28,13 @@
 			<h3>Register</h3>
 			<form action="/register" method="post">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Username" value="" />
+					<input type="text" class="form-control" placeholder="Username" value="" name="username" required />
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Email" value="" />
+					<input type="email" class="form-control" placeholder="Email" value="" name="email" required />
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Password" value="" />
+					<input type="password" class="form-control" placeholder="Password" value="" name="password" required />
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btnSubmit" value="Register" />
