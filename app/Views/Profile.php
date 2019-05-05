@@ -135,7 +135,7 @@
 					</div>
 				</div>
 
-				<input type="submit" class="btn btn-success" value="Save" />
+				<input type="submit" class="btnSubmit" value="Save" />
 			</form>
 
 			<hr>
@@ -170,7 +170,7 @@
 					</div>
 				</div>
 
-				<input type="submit" class="btn btn-success" value="Change" />
+				<input type="submit" class="btnSubmit" value="Change" />
 			</form>
 
 			<hr>

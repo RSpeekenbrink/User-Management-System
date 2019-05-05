@@ -6,7 +6,25 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 	$users = App\Models\User::all();
 }
 
-?>
+if (isset($_GET['delete'])) {
+	?>
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		User Succesfull Deleted!
+
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<?php }
+if (isset($_GET['create'])) { ?>
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		User Succesfull Created!
+
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<?php } ?>
 
 <div class="container my-5">
 
@@ -19,6 +37,8 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 
 				<input type="submit" value="Search">
 			</form>
+
+			<a href="/admin/add">Create new</a>
 		</div>
 	</div>
 
@@ -46,8 +66,8 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 					<td><?php echo $item->updated_at ?></td>
 					<td><?php echo $item->created_at ?></td>
 					<td>
-						<a href="/admin/edit/<?php echo $item->id ?>">Edit</a>
-						<a href="/admin/delete/<?php echo $item->id ?>">Delete</a>
+						<a href="/admin/edit?user=<?php echo $item->id ?>">Edit</a>
+						<a href="/admin/delete?user=<?php echo $item->id ?>">Delete</a>
 					</td>
 				</tr>
 			<?php } ?>

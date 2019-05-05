@@ -186,6 +186,11 @@ class Kernel implements KernelInterface
 		Route::post('/updateProfile', 'ProfileController@updateProfile', 'Web,Authenticated');
 		Route::post('/changePassword', 'ProfileController@changePassword', 'Web,Authenticated');
 		Route::get('/admin', 'AdminController@index', 'Web,Authenticated,Admin');
+		Route::get('/admin/delete', 'AdminController@deleteUser', 'Web,Authenticated,Admin');
+		Route::get('/admin/edit', 'AdminController@editUserForm', 'Web,Authenticated,Admin');
+		Route::post('/admin/edit', 'AdminController@editUser', 'Web,Authenticated,Admin');
+		Route::get('/admin/add', 'AdminController@addUserForm', 'Web,Authenticated,Admin');
+		Route::post('/admin/add', 'AdminController@addUser', 'Web,Authenticated,Admin');
 	}
 
 	/**
