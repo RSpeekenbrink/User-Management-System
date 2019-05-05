@@ -28,43 +28,48 @@ interface RouteInterface
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function post($route, $handler);
+	public static function post(string $route, string $handler, string $middleware = '');
 
 	/**
 	 * Add a new GET route to the Route collection
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function get($route, $handler);
+	public static function get(string $route, string $handler, string $middleware = '');
 
 	/**
 	 * Add a new DELETE route to the Route collection
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function delete($route, $handler);
+	public static function delete(string $route, string $handler, string $middleware = '');
 
 	/**
 	 * Add a new PUT route to the Route collection
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function put($route, $handler);
+	public static function put(string $route, string $handler, string $middleware = '');
 
 	/**
 	 * Add a new PATCH route to the Route collection
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function patch($route, $handler);
+	public static function patch(string $route, string $handler, string $middleware = '');
 }

@@ -42,7 +42,7 @@ if (isset($_SESSION['user_id'])) {
 				</div>
 			<?php } else { ?>
 				<div class="form-inline my-2 my-lg-0">
-					<a class="my-sm-0 my-2 mr-2"><?php echo $user->username; ?></a>
+					<a class="my-sm-0 my-2 mr-2" href="/profile"><?php echo $user->username; ?></a>
 					<a class="btn btn-outline-secondary my-2 my-sm-0" href="/logout">Logout</a>
 				</div>
 			<?php } ?>

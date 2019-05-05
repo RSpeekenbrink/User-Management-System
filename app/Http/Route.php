@@ -88,11 +88,12 @@ class Route implements RouteInterface
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function post($route, $handler)
+	public static function post(string $route, string $handler, string $middleware = '')
 	{
-		static::set('postRoutes', $route, $handler);
+		static::set('postRoutes', $route, $handler, $middleware);
 	}
 
 	/**
@@ -100,11 +101,12 @@ class Route implements RouteInterface
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function get($route, $handler)
+	public static function get(string $route, string $handler, string $middleware = '')
 	{
-		static::set('getRoutes', $route, $handler);
+		static::set('getRoutes', $route, $handler, $middleware);
 	}
 
 	/**
@@ -112,11 +114,12 @@ class Route implements RouteInterface
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function delete($route, $handler)
+	public static function delete(string $route, string $handler, string $middleware = '')
 	{
-		static::set('deleteRoutes', $route, $handler);
+		static::set('deleteRoutes', $route, $handler, $middleware);
 	}
 
 	/**
@@ -124,11 +127,12 @@ class Route implements RouteInterface
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function put($route, $handler)
+	public static function put(string $route, string $handler, string $middleware = '')
 	{
-		static::set('putRoutes', $route, $handler);
+		static::set('putRoutes', $route, $handler, $middleware);
 	}
 
 	/**
@@ -136,11 +140,12 @@ class Route implements RouteInterface
 	 *
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	public static function patch($route, $handler)
+	public static function patch(string $route, string $handler, string $middleware = '')
 	{
-		static::set('patchRoutes', $route, $handler);
+		static::set('patchRoutes', $route, $handler, $middleware);
 	}
 
 	/**
@@ -149,13 +154,15 @@ class Route implements RouteInterface
 	 * @param string $collectionName
 	 * @param string $route
 	 * @param string $handler in format 'Controller@Function'
+	 * @param string $middleware (optional)
 	 * @return void
 	 */
-	private static function set($collectionName, $route, $handler)
+	private static function set($collectionName, $route, $handler, $middleware = '')
 	{
 		self::$$collectionName[] = array(
 			'route' => $route,
-			'handler' => $handler
+			'handler' => $handler,
+			'middleware' => (empty($middleware) ? null : $middleware)
 		);
 	}
 }

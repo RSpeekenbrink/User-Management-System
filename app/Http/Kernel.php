@@ -24,6 +24,13 @@ class Kernel implements KernelInterface
 	public $controllerNamespace = '\\App\\Http\\Controllers';
 
 	/**
+	 * Middleware Namespace
+	 *
+	 * @var string
+	 */
+	public $middlewareNamespace = '\\App\\Http\\Middleware';
+
+	/**
 	 * Enables Debug Mode
 	 *
 	 * @return void
@@ -92,13 +99,47 @@ class Kernel implements KernelInterface
 
 		$this->boot();
 
-		$handler = $this->getHandlerForRequest($request);
+		if ($this->handleMiddleware($request)) {
+			$handler = $this->getHandlerForRequest($request);
 
-		$controller = $this->controllerNamespace . '\\' . explode('@', $handler)[0];
-		$function = explode('@', $handler)[1];
+			$controller = $this->controllerNamespace . '\\' . explode('@', $handler)[0];
+			$function = explode('@', $handler)[1];
 
-		$controller = new $controller();
-		$controller->{$function}($request);
+			$controller = new $controller();
+			$controller->{$function}($request);
+		}
+	}
+
+	/**
+	 * Handle the middleware for the request when pressent
+	 * 
+	 * @return bool continue
+	 */
+	private function handleMiddleware(Request $request)
+	{
+		$routes = Route::getRoutesForMethod($request->method());
+		$url = strtok($request->url(), '?');
+		$result = null;
+
+		foreach ($routes as $route) {
+			if ($route['route'] == $url) {
+				if (isset($route['middleware'])) {
+					$middlewares = explode(',', $route['middleware']);
+
+					foreach ($middlewares as $middleware) {
+						$middlewareClass = $this->middlewareNamespace . '\\' . $middleware;
+						$middlewareClass = new $middlewareClass();
+
+						if (!$middlewareClass->handle($request)) {
+							return false;
+						}
+					}
+				}
+				break;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -142,6 +183,7 @@ class Kernel implements KernelInterface
 		Route::post('/register', 'AuthController@postRegister');
 		Route::post('/logout', 'AuthController@logout');
 		Route::get('/logout', 'AuthController@logout');
+		Route::get('/profile', 'ProfileController@getProfile', 'Authenticated');
 	}
 
 	/**
