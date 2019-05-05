@@ -176,14 +176,14 @@ class Kernel implements KernelInterface
 	 */
 	public function setupRoutes()
 	{
-		Route::get('/', 'HomeController@index');
-		Route::get('/login', 'AuthController@showLoginForm');
-		Route::post('/login', 'AuthController@postLogin');
-		Route::get('/register', 'AuthController@showLoginForm');
-		Route::post('/register', 'AuthController@postRegister');
-		Route::post('/logout', 'AuthController@logout');
-		Route::get('/logout', 'AuthController@logout');
-		Route::get('/profile', 'ProfileController@getProfile', 'Authenticated');
+		Route::get('/', 'HomeController@index', 'Web');
+		Route::get('/login', 'AuthController@showLoginForm', 'Web');
+		Route::post('/login', 'AuthController@postLogin', 'Web');
+		Route::get('/register', 'AuthController@showLoginForm', 'Web');
+		Route::post('/register', 'AuthController@postRegister', 'Web');
+		Route::post('/logout', 'AuthController@logout', 'Web');
+		Route::get('/logout', 'AuthController@logout', 'Web');
+		Route::get('/profile', 'ProfileController@getProfile', 'Web,Authenticated');
 	}
 
 	/**

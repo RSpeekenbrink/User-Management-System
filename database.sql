@@ -5,6 +5,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-COMMIT;
+  `last_login` datetime DEFAULT NULL,
+  `security_question` varchar(256) DEFAULT NULL,
+  `security_question_answer` varchar(256) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
