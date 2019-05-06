@@ -4,11 +4,11 @@ namespace App\Tests\Http;
 
 use App\Tests\TestCase;
 
-class KernelTest extends TestCase
+class RouteTest extends TestCase
 {
-    public function testKernelCanBeInstantiated()
+    public function testRouteCanBeInstantiated()
     {
-        $reflectionClass = new \ReflectionClass(\App\Http\Kernel::class);
+        $reflectionClass = new \ReflectionClass(\App\Http\Route::class);
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertEquals('App\Http', $reflectionClass->getNamespaceName());

@@ -28,6 +28,14 @@ The autoloader got generated via composer. I can make one myself but this is jus
 
 You can register as new user and then login. When no security question has been set you will be asked to set one. You can always change your data/security question by clicking on your name after logging in. The remember token will be set when checked on login and will be valid for 7 days (set by cookie lifetime). On logout the remember token will be removed. To get into the 'admin dashboard' you will have to make yourself admin by changing admin to 1 in the database.
 
+## Testing
+
+After installing the composer dev requirements the application can be tested by executing the following command from the project root directory:
+
+```
+vendor/bin/phpunit
+```
+
 ## TODO
 
 - Global error catching (without whoops, just show a 500 page)

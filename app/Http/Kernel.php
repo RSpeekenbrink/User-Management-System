@@ -118,7 +118,6 @@ class Kernel implements KernelInterface
     private function handleMiddleware(Request $request)
     {
         $routes = Route::getRoutesForMethod($request->method());
-        $result = null;
 
         foreach ($routes as $route) {
             if ($route['route'] == $request->url()) {

@@ -4,11 +4,11 @@ namespace App\Tests\Http;
 
 use App\Tests\TestCase;
 
-class KernelTest extends TestCase
+class ViewTest extends TestCase
 {
-    public function testKernelCanBeInstantiated()
+    public function testViewCanBeInstantiated()
     {
-        $reflectionClass = new \ReflectionClass(\App\Http\Kernel::class);
+        $reflectionClass = new \ReflectionClass(\App\Http\View::class);
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertEquals('App\Http', $reflectionClass->getNamespaceName());
