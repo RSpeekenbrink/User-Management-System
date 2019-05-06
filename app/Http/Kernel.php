@@ -161,8 +161,8 @@ class Kernel implements KernelInterface
         }
 
         if ($result == null) {
-            // TODO: Catch and show 404
-            throw new \Exception('Request Handler not Found');
+            View::create('Error.404', $request)->show();
+            exit();
         } else {
             return $result;
         }
@@ -212,7 +212,7 @@ class Kernel implements KernelInterface
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $whoops->register();
         } else {
-            //TODO: Normal Exception Screen
+            // TODO Setup Status 500 Screen On Error Catch
         }
     }
 }
