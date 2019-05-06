@@ -30,6 +30,18 @@ class Web implements MiddlewareInterface
             }
         }
 
+        if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
+            $user = User::getByRememberToken($_COOKIE['remember_token']);
+
+            if ($user) {
+                // Log User In
+                $_SESSION['user_id'] = $user->id;
+            } else {
+                // Unset Token
+                unset($_COOKIE['remember_token']);
+            }
+        }
+
         return true;
     }
 }

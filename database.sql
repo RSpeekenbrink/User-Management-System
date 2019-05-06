@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_login` datetime DEFAULT NULL,
   `security_question` varchar(256) DEFAULT NULL,
   `security_question_answer` varchar(256) DEFAULT NULL,
+  `remember_token` varchar(256) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),

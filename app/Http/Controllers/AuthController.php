@@ -73,6 +73,10 @@ class AuthController extends Controller
         $userToLogIn->last_login = date("Y-m-d H:i:s");
         $userToLogIn->save();
 
+        if (isset($_POST['remember-me']) && $_POST['remember-me']) {
+            setcookie('remember_token', $userToLogIn->generateRememberToken(), time() + (86400 * 7), "/"); // 7 Days
+        }
+
         header('Location: ../');
         return;
     }
@@ -149,6 +153,10 @@ class AuthController extends Controller
         if (!isset($_SESSION['user_id'])) {
             header('Location: ../login');
             return;
+        }
+
+        if ($user = User::find($_SESSION['user_id'])) {
+            $user->unsetRememberToken();
         }
 
         session_unset();
