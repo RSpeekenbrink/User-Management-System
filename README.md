@@ -1,4 +1,5 @@
 # User Management System
+![Build Status](https://travis-ci.org/RSpeekenbrink/User-Management-System.svg?branch=master)
 A User Management System Made in PHP Without use of any frameworks. This was made to test knowledge on base PHP and to understand PHP deeper. This project exists out of a small MVC framework (self build) using the [Front Controller Design Pattern](https://en.wikipedia.org/wiki/Front_controller).
 
 ## Requirements
