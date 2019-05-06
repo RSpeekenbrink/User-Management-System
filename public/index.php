@@ -2,9 +2,9 @@
 
 /**
  * User Management System
- * 
+ *
  * A User Management System without any frameworks to test PHP knowledge
- * 
+ *
  * @author Remco Speekenbrink
  */
 

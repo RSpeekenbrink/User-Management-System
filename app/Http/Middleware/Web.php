@@ -13,23 +13,23 @@ use App\Models\User;
  */
 class Web implements MiddlewareInterface
 {
-	/**
-	 * Handle the middleware
-	 * 
-	 * @return bool continue
-	 */
-	public function handle(Request $request)
-	{
-		if (isset($_SESSION['user_id']) && $request->url() != '/securityQuestion') {
-			$user = User::find($_SESSION['user_id']);
+    /**
+     * Handle the middleware
+     *
+     * @return bool continue
+     */
+    public function handle(Request $request)
+    {
+        if (isset($_SESSION['user_id']) && $request->url() != '/securityQuestion') {
+            $user = User::find($_SESSION['user_id']);
 
-			// No Security Question Set
-			if ($user && !$user->security_question) {
-				header('Location: ../securityQuestion?force=1');
-				return false;
-			}
-		}
+            // No Security Question Set
+            if ($user && !$user->security_question) {
+                header('Location: ../securityQuestion?force=1');
+                return false;
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 }

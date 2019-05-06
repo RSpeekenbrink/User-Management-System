@@ -6,10 +6,10 @@ use App\Http\Request;
 
 interface MiddlewareInterface
 {
-	/**
-	 * Handle the middleware
-	 * 
-	 * @return bool continue
-	 */
-	public function handle(Request $request);
+    /**
+     * Handle the middleware
+     *
+     * @return bool continue
+     */
+    public function handle(Request $request);
 }

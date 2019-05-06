@@ -9,14 +9,14 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-	/**
-	 * Prepare the index view and return it
-	 * 
-	 * @param Request $request
-	 * @return View
-	 */
-	public function index(Request $request)
-	{
-		View::create('Home', $request)->show();
-	}
+    /**
+     * Prepare the index view and return it
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request)
+    {
+        View::create('Home', $request)->show();
+    }
 }

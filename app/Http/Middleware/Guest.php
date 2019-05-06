@@ -7,18 +7,18 @@ use App\Http\Request;
 
 class Guest implements MiddlewareInterface
 {
-	/**
-	 * Handle the middleware
-	 * 
-	 * @return bool continue
-	 */
-	public function handle(Request $request)
-	{
-		if (isset($_SESSION['user_id'])) {
-			header('Location: ../');
-			return false;
-		}
+    /**
+     * Handle the middleware
+     *
+     * @return bool continue
+     */
+    public function handle(Request $request)
+    {
+        if (isset($_SESSION['user_id'])) {
+            header('Location: ../');
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 }

@@ -9,24 +9,24 @@ namespace App\Contracts\Http;
  */
 interface RequestInterface
 {
-	/**
-	 * Create a new Request based on input from client.
-	 *
-	 * @return self
-	 */
-	public static function capture();
+    /**
+     * Create a new Request based on input from client.
+     *
+     * @return self
+     */
+    public static function capture();
 
-	/**
-	 * Get the URL for the request.
-	 *
-	 * @return string
-	 */
-	public function url();
+    /**
+     * Get the URL for the request.
+     *
+     * @return string
+     */
+    public function url();
 
-	/**
-	 * Get the request method.
-	 *
-	 * @return string
-	 */
-	public function method();
+    /**
+     * Get the request method.
+     *
+     * @return string
+     */
+    public function method();
 }

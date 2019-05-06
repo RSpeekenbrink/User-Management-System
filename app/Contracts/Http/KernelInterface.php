@@ -11,51 +11,51 @@ use App\Http\Request;
  */
 interface KernelInterface
 {
-	/**
-	 * Boots the Kernel
-	 */
-	public function boot();
+    /**
+     * Boots the Kernel
+     */
+    public function boot();
 
-	/**
-	 * Reboots the Kernel
-	 * 
-	 * @return void
-	 */
-	public function reboot();
+    /**
+     * Reboots the Kernel
+     *
+     * @return void
+     */
+    public function reboot();
 
-	/**
-	 * Enables Debug Mode
-	 *
-	 * @return void
-	 */
-	public function enableDebug();
+    /**
+     * Enables Debug Mode
+     *
+     * @return void
+     */
+    public function enableDebug();
 
-	/**
-	 * Disables Debug Mode
-	 *
-	 * @return void
-	 */
-	public function disableDebug();
+    /**
+     * Disables Debug Mode
+     *
+     * @return void
+     */
+    public function disableDebug();
 
-	/**
-	 * Handles a request and returns a response that will be send back to the client.
-	 * 
-	 * @param App\Application $app
-	 * @param App\Http\Request $request The Request To Handle
-	 */
-	public function handle(\App\Application $app, \App\Http\Request $request);
+    /**
+     * Handles a request and returns a response that will be send back to the client.
+     *
+     * @param App\Application $app
+     * @param App\Http\Request $request The Request To Handle
+     */
+    public function handle(\App\Application $app, \App\Http\Request $request);
 
-	/**
-	 * Registers Routes
-	 *
-	 * @return void
-	 */
-	public function setupRoutes();
+    /**
+     * Registers Routes
+     *
+     * @return void
+     */
+    public function setupRoutes();
 
-	/**
-	 * Sets up Exception Handling
-	 * 
-	 * @return void
-	 */
-	public function setupExceptionHandling();
+    /**
+     * Sets up Exception Handling
+     *
+     * @return void
+     */
+    public function setupExceptionHandling();
 }
