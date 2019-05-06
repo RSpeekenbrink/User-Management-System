@@ -16,7 +16,9 @@ in the application's root directory. Then import the database.sql file into your
 
 ## About
 
-This project was made to challenge myself on base knowledge of PHP and is in no way intended to be used on a production environment. First of all the way password resetting was chosen is not a secure way to do it but it didn't require to set up a mail server and opened up some new challenges. The Router is not 100% perfect too, it's missing some features aswell as checking/providing CSRF tokens against Cross Site Request Forgeries. I will try however to update and improve this project over time making it a lightweight ums without any dependencies.
+This project was made to challenge myself on base knowledge of PHP and is in no way intended to be used on a production environment. First of all the way password resetting was chosen is not a secure way to do it but it didn't require to set up a mail server and opened up some new challenges. The Router is not 100% perfect too, it's missing some features aswell as checking/providing CSRF tokens against Cross Site Request Forgeries. I will try however to update and improve this project over time making it a lightweight ums without any dependencies but still open for extension.
+
+Using no frameworks was done intentionally to test myself on PHP knowledge and perform all the 'heavy tasks' manually. 
 
 The dependencies that are delivered are just for debugging/testing purposes and are not required for a 'production' environment.
 
@@ -31,6 +33,12 @@ You can register as new user and then login. When no security question has been 
 - Global error catching (without whoops, just show a 500 page)
 - CSRF Token Implementation
 - Make it possible for admins to assign other admins via the dashboard
+- JSON Responses
+- Make Error Bags to return errors to views easier
+- Make URL variables ('/edit/{var}')
+- Parse Request Variables into Variable Bags for easier access
+- Make Validation class for easier Validation of Variables
+- New Features? (I can go on forever, Really)
 
 ## Screenshots
 
