@@ -6,8 +6,12 @@ A User Management System Made in PHP Without use of any frameworks. This was mad
 ## Requirements
 In order to run this system you need to have [Composer](https://getcomposer.org/) and a [MySQL database](https://www.mysql.com/) installed aswell as a running PHP environment with the [PDO mysql php extension](https://www.php.net/manual/en/book.pdo.php) running PHP 7.2+.
 
+This project also supports the use of vagrant. In that case you only need to have [Vagrant](https://www.vagrantup.com/) installed with the VirtualBox driver.
+
 ## Installation
 
+
+### Non-Vagrant
 First install the dependencies and generate the autoloader by executing
 
 ```
@@ -15,6 +19,9 @@ composer install
 ```
 
 in the application's root directory. Then import the database.sql file into your database and configure your database credentials in `config.php`. Once that is setup you can start the application by pointing your PHP environment to the application's public folder.
+
+### Vagrant
+Execute `vagrant up` in the project folder and the project will be reachable on `localhost:8080`.
 
 ## About
 
