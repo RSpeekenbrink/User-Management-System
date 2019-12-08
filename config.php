@@ -17,7 +17,7 @@ return [
 		'host' 	   => 'localhost',
 		'database' => 'ums',
 		'username' => 'root',
-		'password' => '',
+		'password' => 'root',
 		'driver'   => 'mysql',
 		'charset'  => 'utf8'
 	]
