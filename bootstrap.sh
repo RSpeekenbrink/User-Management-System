@@ -7,7 +7,7 @@ add-apt-repository -y ppa:ondrej/php
 apt-get update
 
 # ---------------------------------------
-#          Apache Setup
+#          Apache/PHP Setup
 # ---------------------------------------
 apt-get install -y apache2 php7.2 php7.2-cli php7.2-common
 apt-get install -y php7.2-mysql php7.2-bcmath php7.2-bz2 php7.2-curl php7.2-intl php7.2-json php7.2-mbstring php7.2-opcache php7.2-soap php7.2-sqlite3 php7.2-xml php7.2-xsl php7.2-zip libapache2-mod-php7.2
@@ -43,7 +43,7 @@ if ! grep -q "cd /var/www" /home/ubuntu/.profile; then
 fi
 echo "** [PHP] Run the following command to install dependencies, if you have not already:"
 echo "    vagrant ssh -c 'composer install'"
-echo "** [PHP] Visit http://localhost:8080 in your browser for to view the application **"
+echo "** [PHP] Visit http://localhost:8080 in your browser to view the application **"
 
 # ---------------------------------------
 #          MySQL Setup
