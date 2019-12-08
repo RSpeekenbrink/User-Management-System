@@ -65,4 +65,4 @@ sudo service mysql restart
 
 # create fresh database
 mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS ums;"
-mysql -u root -proot ums < "/vagrant/database.sql"
+mysql -u root -proot ums < "/var/www/database.sql"
